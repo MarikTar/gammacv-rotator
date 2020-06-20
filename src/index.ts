@@ -1,13 +1,13 @@
 import * as gm from 'gammacv';
 
-const imgURL = 'https://www.mos.ru/altmosmvc/static/renovation2/img/kvartaly/img-shrub-03.a051a3363d7a.png';
+const imgURL = 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSva5ZvjoZhPmJP6dLVYiP5UzXVRtWkYLjWAt7u684DXNH5cc2y&usqp=CAU';
 const width = 256;
 const height = 256;
 const wrapper = document.getElementById('container');
 const rangeGrad = document.querySelector('#range_grad') as HTMLElement;
 const valueGrad = document.querySelector('#value_grad');
 const canvas = gm.canvasCreate(width, height);
-wrapper.appendChild(canvas);
+wrapper.prepend(canvas);
 
 const render = (g: number) => {
   gm.imageTensorFromURL(imgURL, 'uint8', [height, width, 4], true).then((input) => {
@@ -52,6 +52,6 @@ render(0);
 
 rangeGrad.addEventListener('input', (e) => {
   const g = (e.target as HTMLTextAreaElement).value;
-  valueGrad.innerHTML = g;
+  valueGrad.innerHTML = `${g}°`;
   render(+g);
 });
